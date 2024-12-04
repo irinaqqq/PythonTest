@@ -19,17 +19,18 @@
 1. **Python** версии 3.8 или выше.
 2. Установите виртуальное окружение:
 
-   ```bash
+      ```bash
    python -m venv venv
 Активируйте виртуальное окружение:
 
 Для Windows:
-   ```bash
 
-.\venv\Scripts\activate
+     .\venv\Scripts\activate
+
 Для macOS/Linux:
-   ```bash
-source venv/bin/activate
+
+     source venv/bin/activate
+     
 Установите зависимости:
 
 bash
