@@ -5,6 +5,7 @@ from app.models import *
 from datetime import datetime
 from fastapi.security import OAuth2PasswordBearer
 from app.auth import create_access_token, get_current_user
+from fastapi.responses import HTMLResponse
 
 app = FastAPI(
     title="Weather API",
@@ -12,8 +13,32 @@ app = FastAPI(
     version="1.0.0"
 )
 
+@app.get("/", response_class=HTMLResponse, description="Main page with links to all available endpoints.", tags=["Home"])
+def home():
+    return """
+    <html>
+        <head>
+            <title>FastAPI Weather App</title>
+        </head>
+        <body>
+            <h1>Welcome to the FastAPI Weather App!</h1>
+            <p>API for fetching and managing weather data for cities. Includes weather data storage, updates, and protected access.</p>
+            <ul>
+                <li><strong><a href="/docs">/docs</a></strong>: Access the Swagger UI with all the API documentation.</li>
+                <li><strong><a href="/test-weather/Astana">/test-weather/Astana</a></strong>: Get weather data for Astana. A test endpoint to test integration with an external API.</li>
+                <li><strong><a href="/weather/Almaty">/weather/Almaty</a></strong>: Shows weather information from the database for Almaty.</li>
+                <li><strong><a href="/token">/token</a></strong>: Log in and get a JWT token for authentication.</li>
+                <li><strong><a href="/protected-endpoint">/protected-endpoint</a></strong>: Access a protected endpoint (requires authentication).</li>
+                <li><strong><a href="/weather-info/Almaty">/weather-info/Almaty</a></strong>: Get weather info for Almaty, either from the database or an external API (requires authentication).</li>
+            </ul>
+            <p>For more details, you can check out the <a href="/docs">Swagger UI</a> to interact with the API directly.</p>
+        </body>
+    </html>
+"""
+
+
 @app.post("/token", response_model=Token, summary="Login to get access token", tags=["Authentication"])
-def login_for_access_token(username: str, password: str):
+def login_for_access_token(request: TokenRequest):
     """
     Получение JWT токена для авторизации.
     Логин и пароль для разработки: `admin` (по умолчанию).
@@ -29,11 +54,12 @@ def login_for_access_token(username: str, password: str):
     Ошибки:
     - 401: Неверное имя пользователя или пароль (если указано что-то отличное от "admin").
     """
-    if username != "admin" or password != "admin":
+    if request.username != "admin" or request.password != "admin":
         raise HTTPException(status_code=401, detail="Incorrect username or password")
     
-    access_token = create_access_token(data={"sub": username})
+    access_token = create_access_token(data={"sub": request.username})
     return {"access_token": access_token, "token_type": "bearer"}
+
 
 @app.get("/protected-endpoint", summary="Access a protected endpoint", tags=["Protected Endpoints"])
 def protected_endpoint(current_user: TokenData = Depends(get_current_user)):
