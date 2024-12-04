@@ -65,10 +65,13 @@
 - **Пример запроса** (Postman):
   - **URL**: `http://127.0.0.1:8000/token`
   - **Метод**: `POST`
-  - **Тело запроса** (формат `x-www-form-urlencoded`):
-    - `username`: admin
-    - `password`: admin
-
+  - **Тело запроса** (формат JSON):
+    ```json
+    {
+      "username": "admin",
+      "password": "admin"
+    }
+    ```
 ### 3. **Доступ к защищённому эндпоинту**
 - **Эндпоинт**: `/protected-endpoint`
 - **Метод**: `GET`
