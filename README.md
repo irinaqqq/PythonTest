@@ -33,15 +33,12 @@
      
 Установите зависимости:
 
-bash
-Копировать код
-pip install -r requirements.txt
+
+      pip install -r requirements.txt
 Запуск приложения
 Чтобы запустить приложение, используйте команду:
 
-bash
-Копировать код
-uvicorn main:app --reload
+      uvicorn app.main:app --reload
 После этого приложение будет доступно по адресу http://127.0.0.1:8000.
 
 Для доступа к документации API откройте http://127.0.0.1:8000/docs.
