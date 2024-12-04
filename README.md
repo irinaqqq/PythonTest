@@ -53,120 +53,107 @@ POST /token
 username: Имя пользователя (строка).
 password: Пароль (строка).
 Пример запроса:
-bash
-Копировать код
-curl -X 'POST' \
-  'http://127.0.0.1:8000/token' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d 'username=admin&password=admin'
+
+      curl -X 'POST' \
+        'http://127.0.0.1:8000/token' \
+        -H 'accept: application/json' \
+        -H 'Content-Type: application/x-www-form-urlencoded' \
+        -d 'username=admin&password=admin'
 Ответ:
-json
-Копировать код
-{
-  "access_token": "jwt_token_value",
-  "token_type": "bearer"
-}
+
+      {
+        "access_token": "jwt_token_value",
+        "token_type": "bearer"
+      }
 2. Защищенный эндпоинт
 GET /protected-endpoint
 
 Защищенный эндпоинт, доступный только для авторизованных пользователей.
 
 Пример запроса:
-bash
-Копировать код
-curl -X 'GET' \
-  'http://127.0.0.1:8000/protected-endpoint' \
-  -H 'Authorization: Bearer jwt_token_value'
+
+      curl -X 'GET' \
+        'http://127.0.0.1:8000/protected-endpoint' \
+        -H 'Authorization: Bearer jwt_token_value'
 Ответ:
-json
-Копировать код
-{
-  "message": "Hello admin, you have access!"
-}
+
+      {
+        "message": "Hello admin, you have access!"
+      }
 3. Получение данных о погоде для города
 GET /weather/{city}
 
 Получение данных о погоде для указанного города.
 
 Пример запроса:
-bash
-Копировать код
-curl -X 'GET' \
-  'http://127.0.0.1:8000/weather/London'
+
+      curl -X 'GET' \
+        'http://127.0.0.1:8000/weather/London'
 Ответ:
-json
-Копировать код
-[
-  {
-    "id": 1,
-    "city": "London",
-    "temperature": 15.5,
-    "description": "Clear sky",
-    "timestamp": "2024-12-04T18:22:25"
-  }
-]
+
+      [
+        {
+          "id": 1,
+          "city": "London",
+          "temperature": 15.5,
+          "description": "Clear sky",
+          "timestamp": "2024-12-04T18:22:25"
+        }
+      ]
 4. Создание данных о погоде
 POST /weather/
 
 Сохранение данных о погоде для города в базе данных. Требуется авторизация.
 
 Пример запроса:
-bash
-Копировать код
-curl -X 'POST' \
-  'http://127.0.0.1:8000/weather/' \
-  -H 'Authorization: Bearer jwt_token_value' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "city": "New York",
-    "temperature": 10,
-    "description": "Cloudy"
-}'
+
+      curl -X 'POST' \
+        'http://127.0.0.1:8000/weather/' \
+        -H 'Authorization: Bearer jwt_token_value' \
+        -H 'Content-Type: application/json' \
+        -d '{
+          "city": "New York",
+          "temperature": 10,
+          "description": "Cloudy"
+      }'
 Ответ:
-json
-Копировать код
-{
-  "status": "success",
-  "message": "Data for New York saved successfully."
-}
+
+      {
+        "status": "success",
+        "message": "Data for New York saved successfully."
+      }
 5. Обновление данных о погоде
 PUT /weather/{city}
 
 Обновление данных о погоде для указанного города.
 
 Пример запроса:
-bash
-Копировать код
-curl -X 'PUT' \
-  'http://127.0.0.1:8000/weather/London' \
-  -H 'Authorization: Bearer jwt_token_value'
+
+      curl -X 'PUT' \
+        'http://127.0.0.1:8000/weather/London' \
+        -H 'Authorization: Bearer jwt_token_value'
 Ответ:
-json
-Копировать код
-{
-  "status": "success",
-  "message": "Weather data for London updated successfully."
-}
+
+      {
+        "status": "success",
+        "message": "Weather data for London updated successfully."
+      }
 6. Удаление данных о погоде
 DELETE /weather/{city}
 
 Удаление данных о погоде для указанного города.
 
 Пример запроса:
-bash
-Копировать код
-curl -X 'DELETE' \
-  'http://127.0.0.1:8000/weather/London' \
-  -H 'Authorization: Bearer jwt_token_value'
-Ответ:
-json
-Копировать код
-{
-  "status": "success",
-  "message": "Weather data for London deleted successfully."
-}
-Развернутый сервис
-Ваш сервис доступен по следующему URL: https://your-app-name.onrender.com.
 
-Для получения дополнительной информации и обновлений следите за репозиторием на GitHub.
+      curl -X 'DELETE' \
+        'http://127.0.0.1:8000/weather/London' \
+        -H 'Authorization: Bearer jwt_token_value'
+Ответ:
+
+      {
+        "status": "success",
+        "message": "Weather data for London deleted successfully."
+      }
+Развернутый сервис
+Cервис доступен по следующему URL: [https://pythontest-ievp.onrender.com/]
+
