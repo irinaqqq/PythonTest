@@ -24,12 +24,11 @@
 Активируйте виртуальное окружение:
 
 Для Windows:
-bash
-Копировать код
+   ```bash
+
 .\venv\Scripts\activate
 Для macOS/Linux:
-bash
-Копировать код
+   ```bash
 source venv/bin/activate
 Установите зависимости:
 
