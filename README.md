@@ -155,5 +155,5 @@ DELETE /weather/{city}
         "message": "Weather data for London deleted successfully."
       }
 Развернутый сервис
-Cервис доступен по следующему URL: [https://pythontest-ievp.onrender.com/]
+Cервис доступен по следующему URL: https://pythontest-ievp.onrender.com/
 
